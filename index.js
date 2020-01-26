@@ -24,7 +24,7 @@ app.use(function (err, req, res, next) {
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
-app.get('feed.rss', (req, res) => res.redirect(301, 'http://dataskeptic.libsyn.com/rss')
+app.get('feed.rss', (req, res) => res.redirect(301, 'http://dataskeptic.libsyn.com/rss'))
 
 app.get('/', (req, res) => res.render('pages/index'))
 app.get('/podcasts', (req, res) => res.render('pages/podcasts'))
@@ -32,8 +32,6 @@ app.get('/podcasts', (req, res) => res.render('pages/podcasts'))
 app.get('/insecure', function (req, res) {
   res.send('Dangerous!');
 });
-
-feed.rss
 
 app.get('/blog/*', function(req, res) {
     var key = req.path;
