@@ -21,6 +21,7 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => res.render('pages/index'))
 app.get('/podcasts', (req, res) => res.render('pages/podcasts'))
+app.get('/blog', (req, res) => res.render('pages/blog'))
 
 app.get('/insecure', function (req, res) {
   res.send('Dangerous!');
