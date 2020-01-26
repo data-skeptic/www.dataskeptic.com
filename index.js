@@ -26,5 +26,7 @@ app.get('/insecure', function (req, res) {
   res.send('Dangerous!');
 });
 
+app.get('*', (req, res) => res.send('Page Not found 404'));
+
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
