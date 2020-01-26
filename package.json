@@ -11,6 +11,8 @@
     "test": "node test.js"
   },
   "dependencies": {
+    "aws": "0.0.3-2",
+    "aws-sdk": "^2.610.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "express-http-to-https": "^1.1.4"
