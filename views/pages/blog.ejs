@@ -8,10 +8,16 @@
 
 <% include ../partials/nav.ejs %>
 
+<% if (episode !== undefined) { %>
 <div class="container">
+  <audio controls="controls">
+    <source src="<%= episode.mp3_url %>" />
+  </audio>
+</div>
+<% } %>
 
+<div class="container">
   <%- body %>
-
 </div>
 
 

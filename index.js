@@ -64,9 +64,14 @@ app.get('/blog/*', function(req, res) {
     }
     const root = 'user/test/apps/publishingtools/outbox/data-skeptic/blog/master/'
     key = root + key.substring(6, key.length)
+    const metadata_key = key.substring(0, key.length - 5) + ".episode.json"
     var getParams = {
         Bucket: bucket_name,
         Key: key
+    }
+    var getParams2 = {
+        Bucket: bucket_name,
+        Key: metadata_key
     }
     s3.getObject(getParams, function(err, data) {
         if (err) {
@@ -75,10 +80,20 @@ app.get('/blog/*', function(req, res) {
             return err;
         }
         let body = data.Body.toString('utf-8');
-        res.render('pages/blog', {body})
+        s3.getObject(getParams2, function(err, data) {
+            if (err) {
+                res.render('pages/blog', {body})
+            } else {
+                const ebody = data.Body.toString('utf-8');
+                const episode = JSON.parse(ebody);
+                res.render('pages/blog', {body, episode})
+            }
+        });
     });
 
 });
+
+// TODO: create a honeypot for /wp/wp-admin/ requests
 
 app.get('*', (req, res) => res.send('Page Not found 404'));
 
