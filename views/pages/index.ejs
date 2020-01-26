@@ -20,9 +20,14 @@
   </div>
 </div>
 <div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    Data Skeptic members, please reach out to <a href="mailto:vanessa@dataskeptic.com">vanessa@dataskeptic.com</a> with any questions or issues with your membership.  Thanks for your patience in this time of reinvention.
-  </div>
+  <h2>Latest: <%= episode.title %></h2>
+  <p><%= episode.abstract %></p>
+  <audio controls="controls">
+    <source src="<%= episode.mp3_url %>" />
+  </audio>
+</div>
+<div class="container">
+
   <!--
   <hr>
   <div class="row">

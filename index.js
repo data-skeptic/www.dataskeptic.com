@@ -26,11 +26,35 @@ app.set('view engine', 'ejs')
 
 app.get('/feed.rss', (req, res) => res.redirect(301, 'http://dataskeptic.libsyn.com/rss'))
 
-app.get('/', (req, res) => res.render('pages/index'))
-app.get('/podcasts', (req, res) => res.render('pages/podcasts'))
+app.get('/', (req, res) => {
+    lastest_episode = {
+        "ts":1580054950,
+        "title": "Fooling Computer Vision",
+        "abstract": "Wiebe van Ranst joins us to talk about a project in which specially designed printed images can fool a computer vision system, preventing it from identifying a person.  Their attack targets the popular YOLO2 pre-trained image recognition model, and thus, is likely to be widely applicable.",
+        "author": "",
+        "guid": "d3a15282-a7e5-428b-8153-9b9caff3a463",
+        "mp3_url": "https://traffic.libsyn.com/secure/dataskeptic/fooling-computer-vision.mp3",
+        "duration":1525
+    }
+    res.render('pages/index', {episode: lastest_episode})
+})
 
-app.get('/insecure', function (req, res) {
-  res.send('Dangerous!');
+
+app.get('/login', (req, res) => res.render('pages/login'))
+
+app.get('/podcasts', (req, res) => {
+    const episodes = [
+        {
+            "ts":1580054950,
+            "title": "Fooling Computer Vision",
+            "abstract": "Wiebe van Ranst joins us to talk about a project in which specially designed printed images can fool a computer vision system, preventing it from identifying a person.  Their attack targets the popular YOLO2 pre-trained image recognition model, and thus, is likely to be widely applicable.",
+            "author": "",
+            "guid": "d3a15282-a7e5-428b-8153-9b9caff3a463",
+            "mp3_url": "https://traffic.libsyn.com/secure/dataskeptic/fooling-computer-vision.mp3",
+            "duration":1525
+        }
+    ];
+    res.render('pages/podcasts', {episodes});
 });
 
 app.get('/blog/*', function(req, res) {
@@ -40,7 +64,6 @@ app.get('/blog/*', function(req, res) {
     }
     const root = 'user/test/apps/publishingtools/outbox/data-skeptic/blog/master/'
     key = root + key.substring(6, key.length)
-    console.log("Getting " + key)
     var getParams = {
         Bucket: bucket_name,
         Key: key
@@ -48,7 +71,6 @@ app.get('/blog/*', function(req, res) {
     s3.getObject(getParams, function(err, data) {
         if (err) {
             console.log(err)
-            console.log(data)
             res.render('pages/error')
             return err;
         }
