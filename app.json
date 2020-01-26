@@ -1,0 +1,6 @@
+{
+  "name": "Data Skeptic",
+  "description": "Data science, machine learning, and artificial intelligence",
+  "logo": "https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg",
+  "image": "heroku/nodejs"
+}
