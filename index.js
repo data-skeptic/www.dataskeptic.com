@@ -24,7 +24,7 @@ app.use(function (err, req, res, next) {
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
-app.get('feed.rss', (req, res) => res.redirect(301, 'http://dataskeptic.libsyn.com/rss'))
+app.get('/feed.rss', (req, res) => res.redirect(301, 'http://dataskeptic.libsyn.com/rss'))
 
 app.get('/', (req, res) => res.render('pages/index'))
 app.get('/podcasts', (req, res) => res.render('pages/podcasts'))
@@ -40,14 +40,18 @@ app.get('/blog/*', function(req, res) {
     }
     const root = 'user/test/apps/publishingtools/outbox/data-skeptic/blog/master/'
     key = root + key.substring(6, key.length)
-    console.log(key)
+    console.log("Getting " + key)
     var getParams = {
         Bucket: bucket_name,
         Key: key
     }
     s3.getObject(getParams, function(err, data) {
-        if (err)
+        if (err) {
+            console.log(err)
+            console.log(data)
+            res.render('pages/error')
             return err;
+        }
         let body = data.Body.toString('utf-8');
         res.render('pages/blog', {body})
     });
