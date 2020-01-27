@@ -10,19 +10,14 @@
 
 <div class="container">
 
-    <h1>Data Skeptic</h1>
-
-    <p>Your source for accessible news and updates on topics in and around data science.</p>
+    <h1>Data Skeptic: Interpretability</h1>
 
     <% for (const episode of episodes) { %>
         <h2><%= episode.title %></h2>
-        <p><%= episode.abstract %></p>
-        <iframe
-          frameborder="0"
-          width="350"
-          height="200"
-          src="<%= episode.mp3_url %>">
-        </iframe>
+        <p>
+          <%= episode.abstract %> ...
+          <a href="/blog/<%= episode.path %>">[more]</a>
+        </p>
     <% } %>
 </div>
 
