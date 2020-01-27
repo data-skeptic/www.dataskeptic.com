@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => res.render('pages/login'))
 
 
-app.get('/podcasts', async (req, res) => {
+app.get('/podcasts/dataskeptic', async (req, res) => {
     const path = 'episodes/2020/'
     const prefix = `${root}${path}`
     var getParams = {
@@ -88,6 +88,10 @@ app.get('/podcasts', async (req, res) => {
         }
     }
     res.render('pages/podcasts', {episodes: result});
+});
+
+app.get('/podcasts/jclub', async (req, res) => {
+    res.render('pages/jc/jclub');
 });
 
 app.get('/blog/*', function(req, res) {
