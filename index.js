@@ -9,12 +9,12 @@ const bucket_name = "serverless-crawl";
 
 var app = express();
 
-var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
+//var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
 const root = 'user/test/apps/publishingtools/outbox/data-skeptic/blog/master/'
 
 // Don't redirect if the hostname is `localhost:port` or the route is `/insecure`
-app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
+//app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
 
 app.use(express.static(path.join(__dirname, 'public')))
 
