@@ -87,6 +87,17 @@ app.get('/podcasts', async (req, res) => {
             }
         }
     }
+    function compare( a, b ) {
+      if ( a.ts < b.ts ){
+        return -1;
+      }
+      if ( a.ts > b.ts ){
+        return 1;
+      }
+      return 0;
+    }
+
+    result.sort( compare );
     res.render('pages/podcasts', {episodes: result});
 });
 
