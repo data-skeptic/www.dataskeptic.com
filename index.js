@@ -105,6 +105,7 @@ app.get('/blog/*', function(req, res) {
         Bucket: bucket_name,
         Key: metadata_key
     }
+    var episode = undefined
     s3.getObject(getParams, function(err, data) {
         if (err) {
             console.log(err)
@@ -114,10 +115,10 @@ app.get('/blog/*', function(req, res) {
         let body = data.Body.toString('utf-8');
         s3.getObject(getParams2, function(err, data) {
             if (err) {
-                res.render('pages/blog', {body})
+                res.render('pages/blog', {body, episode})
             } else {
                 const ebody = data.Body.toString('utf-8');
-                const episode = JSON.parse(ebody);
+                episode = JSON.parse(ebody);
                 res.render('pages/blog', {body, episode})
             }
         });
