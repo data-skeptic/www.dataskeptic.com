@@ -1,9 +1,12 @@
 const AWS = require('aws-sdk');
+const cache = require('memory-cache-ttl');
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
 var s3 = new AWS.S3({region: 'us-west-2'});
+
+cache.init({ ttl: 60 * 60 * 3, interval: 1, randomize: false });
 
 const bucket_name = "serverless-crawl";
 
@@ -47,20 +50,24 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => res.render('pages/login'))
 
 
-app.get('/podcasts', async (req, res) => {
-    const path = 'episodes/2020/'
+async function get_episodes(path) {
     const prefix = `${root}${path}`
     var getParams = {
         Bucket: bucket_name,
         Prefix: prefix
     }
-    var data = undefined;
-    try {
-        data = await s3.listObjects(getParams).promise();
-    } catch (err) {
-        console.log(err)
-        res.render('pages/error')
-        return [];
+    let data;
+    if (cache.check(prefix)) {
+        data = cache.get(prefix)
+    } else {
+        try {
+            data = await s3.listObjects(getParams).promise();
+            cache.set(prefix, data);
+        } catch (err) {
+            console.log(err)
+            res.render('pages/error')
+            return [];
+        }
     }
     const result = []
     const episodeList = data.Contents;
@@ -72,19 +79,25 @@ app.get('/podcasts', async (req, res) => {
                 Bucket: bucket_name,
                 Key: episode.Key
             }
-            try {
-                const data2 = await s3.getObject(getParams2).promise();
-                if (data2) {
-                    const ebody = data2.Body.toString('utf-8');
-                    const ep = JSON.parse(ebody);
-                    const k = episode.Key
-                    const i = k.indexOf(path);
-                    ep['path'] = k.substring(i, k.length - x.length);
-                    result.push(ep);
-                };
-            } catch (err) {
-                console.log(err);
+            let data2;
+            if (cache.check(episode.Key)) {
+                data2 = cache.get(episode.Key)
+            } else {
+                try {
+                    data2 = await s3.getObject(getParams2).promise();
+                    cache.set(episode.Key, data2);
+                } catch (err) {
+                    console.log(err);
+                }
             }
+            if (data2) {
+                const ebody = data2.Body.toString('utf-8');
+                const ep = JSON.parse(ebody);
+                const k = episode.Key
+                const i = k.indexOf(path);
+                ep['path'] = k.substring(i, k.length - x.length);
+                result.push(ep);
+            };
         }
     }
     function compare( a, b ) {
@@ -96,9 +109,68 @@ app.get('/podcasts', async (req, res) => {
       }
       return 0;
     }
-
     result.sort( compare );
-    res.render('pages/podcasts', {episodes: result});
+    return result;
+}
+
+app.get('/podcasts', async (req, res) => {
+    const title = "Data Skeptic: Interpretability";
+    const episodes = await get_episodes('episodes/2020/');
+    res.render('pages/podcasts', {title, episodes});
+});
+
+app.get('/podcasts/nlp', async (req, res) => {
+    const title = "Data Skeptic: Natural Language Processing";
+    const episodes = await get_episodes('episodes/2019/');
+    res.render('pages/podcasts', {title, episodes});
+});
+
+app.get('/podcasts/ai', async (req, res) => {
+    const title = "Data Skeptic: Artificial Intelligence";
+    const _episodes = await get_episodes('episodes/2018/');
+    const episodes = []
+    for (const ep of _episodes) {
+        if (ep.album_cover.indexOf("fake-news-album") == -1) {
+            episodes.push(ep);
+        }
+    }
+    res.render('pages/podcasts', {title, episodes});
+});
+
+app.get('/podcasts/fakenews', async (req, res) => {
+    const title = "Data Skeptic: Fake News";
+    const _episodes = await get_episodes('episodes/2018/');
+    const episodes = []
+    for (const ep of _episodes) {
+        if (ep.album_cover.indexOf("fake-news-album") != -1) {
+            episodes.push(ep);
+        }
+    }
+    res.render('pages/podcasts', {title, episodes});
+});
+
+app.get('/podcasts/2017', async (req, res) => {
+    const title = "Data Skeptic: 2017";
+    const episodes = await get_episodes('episodes/2017/');
+    res.render('pages/podcasts', {title, episodes});
+});
+
+app.get('/podcasts/2016', async (req, res) => {
+    const title = "Data Skeptic: 2016";
+    const episodes = await get_episodes('episodes/2016/');
+    res.render('pages/podcasts', {title, episodes});
+});
+
+app.get('/podcasts/2015', async (req, res) => {
+    const title = "Data Skeptic: 2015";
+    const episodes = await get_episodes('episodes/2015/');
+    res.render('pages/podcasts', {title, episodes});
+});
+
+app.get('/podcasts/2014', async (req, res) => {
+    const title = "Data Skeptic: 2014";
+    const episodes = await get_episodes('episodes/2014/');
+    res.render('pages/podcasts', {title, episodes});
 });
 
 app.get('/blog/*', function(req, res) {
