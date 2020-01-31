@@ -113,6 +113,10 @@ async function get_episodes(path) {
     return result;
 }
 
+app.get('/advertising', async (req, res) => {
+    res.render('pages/advertising');
+});
+
 app.get('/podcasts', async (req, res) => {
     const title = "Data Skeptic: Interpretability";
     const episodes = await get_episodes('episodes/2020/');
