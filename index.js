@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 5000
 
 var s3 = new AWS.S3({region: 'us-west-2'});
 
+
 cache.init({ ttl: 60 * 60 * 3, interval: 1, randomize: false });
 
 const bucket_name = "serverless-crawl";
@@ -18,6 +19,7 @@ const root = 'user/test/apps/publishingtools/outbox/data-skeptic/blog/master/'
 
 // Don't redirect if the hostname is `localhost:port` or the route is `/insecure`
 //app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
+
 
 app.use(express.static(path.join(__dirname, 'public')))
 
