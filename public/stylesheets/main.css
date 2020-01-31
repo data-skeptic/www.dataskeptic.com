@@ -1,5 +1,5 @@
 .jumbotron {
-  background: #532F8C;
+      background: url("https://s3.amazonaws.com/dataskeptic.com/imgs/ds_background_2020.png") center center / cover no-repeat;
   color: white;
   padding-bottom: 80px;
 }
@@ -30,7 +30,6 @@
 }
 .jumbotron .lang-logo img {
       max-width: 100%;
-      background: url("https://s3.amazonaws.com/dataskeptic.com/imgs/ds_background_2020.png") center center / cover no-repeat;
 }
 
 
