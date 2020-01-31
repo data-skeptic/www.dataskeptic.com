@@ -93,10 +93,10 @@ async function get_episodes(path) {
         if (key.endsWith(x)) {
             const jdata = await get_s3_json_data(key);
             if (jdata) {
-                const k = episode.Key
-                const i = k.indexOf(path);
-                ep['path'] = k.substring(i, k.length - x.length);
-                result.push(ep);
+                console.log({key, jdata})
+                const i = key.indexOf(path);
+                jdata['path'] = key.substring(i, key.length - x.length);
+                result.push(jdata);
             };
         }
     }
