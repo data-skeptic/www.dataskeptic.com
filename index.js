@@ -31,18 +31,8 @@ app.set('view engine', 'ejs')
 
 app.get('/feed.rss', (req, res) => res.redirect(301, 'http://dataskeptic.libsyn.com/rss'))
 
-app.get('/', (req, res) => {
-    lastest_episode = {
-        "ts": 1580054950,
-        "key": "episodes/2020/fooling-computer-vision",
-        "slug": "fooling-computer-vision",
-        "title": "Fooling Computer Vision",
-        "abstract": "Wiebe van Ranst joins us to talk about a project in which specially designed printed images can fool a computer vision system, preventing it from identifying a person.  Their attack targets the popular YOLO2 pre-trained image recognition model, and thus, is likely to be widely applicable.",
-        "author": "",
-        "guid": "d3a15282-a7e5-428b-8153-9b9caff3a463",
-        "mp3_url": "https://traffic.libsyn.com/secure/dataskeptic/fooling-computer-vision.mp3",
-        "duration": 1525
-    }
+app.get('/', async function(req, res) {
+    const lastest_episode = await get_s3_json_data(`${root}latest.episode.json`);
     res.render('pages/index', {episode: lastest_episode})
 })
 
@@ -50,7 +40,28 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => res.render('pages/login'))
 
 
-async function get_episodes(path) {
+async function get_s3_json_data(key) {
+    var getParams = {
+        Bucket: bucket_name,
+        Key: key
+    }
+    let data;
+    if (cache.check(key)) {
+        data = cache.get(key)
+    } else {
+        try {
+            data = await s3.getObject(getParams).promise();
+            cache.set(key, data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    const s = data.Body.toString('utf-8');
+    return JSON.parse(s);
+}
+
+
+async function get_s3_ls_data(path) {
     const prefix = `${root}${path}`
     var getParams = {
         Bucket: bucket_name,
@@ -69,30 +80,19 @@ async function get_episodes(path) {
             return [];
         }
     }
+    return data.Contents
+}
+
+async function get_episodes(path) {
+    const data = await get_s3_ls_data(path);
     const result = []
-    const episodeList = data.Contents;
+    const episodeList = data;
     for (const episode of episodeList) {
         const key = episode.Key
         const x = '.episode.json'
         if (key.endsWith(x)) {
-            var getParams2 = {
-                Bucket: bucket_name,
-                Key: episode.Key
-            }
-            let data2;
-            if (cache.check(episode.Key)) {
-                data2 = cache.get(episode.Key)
-            } else {
-                try {
-                    data2 = await s3.getObject(getParams2).promise();
-                    cache.set(episode.Key, data2);
-                } catch (err) {
-                    console.log(err);
-                }
-            }
-            if (data2) {
-                const ebody = data2.Body.toString('utf-8');
-                const ep = JSON.parse(ebody);
+            const jdata = await get_s3_json_data(key);
+            if (jdata) {
                 const k = episode.Key
                 const i = k.indexOf(path);
                 ep['path'] = k.substring(i, k.length - x.length);
