@@ -16,11 +16,19 @@
     <h1>Data Skeptic: Interpretability</h1>
 
     <% for (const episode of episodes) { %>
-        <h2><%= episode.title %></h2>
-        <p>
-          <%= episode.abstract %> ...
-          <a href="/blog/<%= episode.path %>">[more]</a>
-        </p>
+      <div class="podcast_summary">
+        <div class="left">
+          <img class="album_art" src="<%= episode.album_cover %>" />
+        </div>
+        <div class="right">
+          <h2><%= episode.title %></h2>
+          <p>
+            <%= episode.abstract %> ...
+            <a href="/blog/<%= episode.path %>">[more]</a>
+          </p>
+        </div>
+      </div>
+      <div><br /></div>
     <% } %>
 
 </div>
