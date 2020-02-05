@@ -58,6 +58,10 @@ async function get_s3_json_data(key) {
             console.log(err);
         }
     }
+    if (data === undefined) {
+        console.log(`No key named ${key} in ${bucket_name}`)
+        return undefined;
+    }
     const s = data.Body.toString('utf-8');
     return JSON.parse(s);
 }
