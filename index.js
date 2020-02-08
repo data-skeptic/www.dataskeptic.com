@@ -123,6 +123,10 @@ app.get('/advertising', async (req, res) => {
     res.render('pages/advertising');
 });
 
+app.get('/donate', async (req, res) => {
+    res.render('pages/donate');
+});
+
 app.get('/podcasts', async (req, res) => {
     const title = "Data Skeptic: Interpretability";
     const episodes = await get_episodes('episodes/2020/');
