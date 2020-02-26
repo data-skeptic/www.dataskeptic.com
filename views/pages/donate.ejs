@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+<% include ../partials/nav.ejs %>
+
+<div class="jumbotron text-center">
+<div class="container ">
+    <h1>Support the Podcast</h1>
+    <p></p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <p>
+                Data Skeptic is produced by the support of listeners like you.  If our podcast has helped you learn a concept or advance in your career, please consider supporting us with a one time donation via the PayPal button.
+            </p>
+        </div>
+        <div class="col-xs-12 col-sm-6 paypal-div">
+
+<div id="paypal-button-container"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script>
+    paypal.Buttons({
+        style: {
+            shape: 'pill',
+            color: 'white',
+            layout: 'vertical',
+            label: 'paypal',
+        },
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '8'
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                alert('Transaction completed by ' + details.payer.name.given_name + '!');
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
+
+        </div>
+</div>
+</div>
+
+
+</body>
+<style>
+    .paypal-div {
+        min-height: 200px;
+    }
+</style>
+</html>
