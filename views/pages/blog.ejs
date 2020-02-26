@@ -9,13 +9,9 @@
 <% include ../partials/nav.ejs %>
 
 <% if (episode !== undefined) { %>
-
-
-<div class="container" id="SkepticPlayer">
+<div class="container">
+  <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.mp3_url %>" title="Data Skeptic" artist="Kyle Polich" album="Podcast" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
 </div>
-
-<script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.mp3_url %>"></script>
-
 <% } %>
 
 <div class="container">
