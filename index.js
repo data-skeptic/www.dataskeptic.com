@@ -33,6 +33,13 @@ app.set('view engine', 'ejs')
 
 app.get('/feed.rss', (req, res) => res.redirect(301, 'http://dataskeptic.libsyn.com/rss'))
 
+app.get('/survey', (req, res) => res.redirect(301, 'https://docs.google.com/forms/d/e/1FAIpQLSc7SbmG04zJFxrDsMH0uIm1geqKwDSJ6P3gq3oGl_9T251Pww/viewform'))
+
+app.post('/flush', async function(req, res) {
+    cache.flush();
+    res.redirect(301, '/')
+})
+
 app.get('/', async function(req, res) {
     const lastest_episode = await get_s3_json_data(`${root}latest.episode.json`);
     res.render('pages/index', {episode: lastest_episode})
@@ -108,10 +115,10 @@ async function get_episodes(path) {
     }
     function compare( a, b ) {
       if ( a.ts < b.ts ){
-        return -1;
+        return 1;
       }
       if ( a.ts > b.ts ){
-        return 1;
+        return -1;
       }
       return 0;
     }
