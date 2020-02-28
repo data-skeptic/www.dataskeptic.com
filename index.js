@@ -35,7 +35,10 @@ app.get('/feed.rss', (req, res) => res.redirect(301, 'http://dataskeptic.libsyn.
 
 app.get('/survey', (req, res) => res.redirect(301, 'https://docs.google.com/forms/d/e/1FAIpQLSc7SbmG04zJFxrDsMH0uIm1geqKwDSJ6P3gq3oGl_9T251Pww/viewform'))
 
-
+app.post('/flush', async function(req, res) {
+    cache.flush();
+    res.redirect(301, '/')
+})
 
 app.get('/', async function(req, res) {
     const lastest_episode = await get_s3_json_data(`${root}latest.episode.json`);
