@@ -33,6 +33,10 @@ app.set('view engine', 'ejs')
 
 app.get('/feed.rss', (req, res) => res.redirect(301, 'http://dataskeptic.libsyn.com/rss'))
 
+app.get('/survey', (req, res) => res.redirect(301, 'https://docs.google.com/forms/d/e/1FAIpQLSc7SbmG04zJFxrDsMH0uIm1geqKwDSJ6P3gq3oGl_9T251Pww/viewform'))
+
+
+
 app.get('/', async function(req, res) {
     const lastest_episode = await get_s3_json_data(`${root}latest.episode.json`);
     res.render('pages/index', {episode: lastest_episode})
