@@ -115,10 +115,10 @@ async function get_episodes(path) {
     }
     function compare( a, b ) {
       if ( a.ts < b.ts ){
-        return -1;
+        return 1;
       }
       if ( a.ts > b.ts ){
-        return 1;
+        return -1;
       }
       return 0;
     }
