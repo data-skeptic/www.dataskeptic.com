@@ -21,11 +21,23 @@
 </div>
 
 <div class="container">
-  <h2>Latest: <%= episode.title %></h2>
-  <p><%= episode.abstract %></p>
-  <audio controls="controls">
-    <source src="<%= episode.mp3_url %>" />
-  </audio>
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Latest: <%= episode.title %></h2>
+      <p><%= episode.abstract %></p>
+      <audio controls="controls">
+        <source src="<%= episode.mp3_url %>" />
+      </audio>
+    </div>
+    <div class="col-sm-6">
+      <% for (const blog of blogs) { %>
+      <div class="blog-small">
+        <h4><a href="<%= blog.url %>"><%= blog.title %></a></h4>
+        <p><%= blog.description %></p>
+      </div>
+      <% } %>
+    </div>
+  </div>
 </div>
 
 </body>

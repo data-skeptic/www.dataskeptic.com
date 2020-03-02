@@ -70,7 +70,9 @@ h2 { font-size: 16pt; }
 
 
 
-
+.blog-small {
+  border-bottom: 1px solid #ccc;
+}
 
 
 
