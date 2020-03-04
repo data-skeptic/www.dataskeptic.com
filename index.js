@@ -41,8 +41,27 @@ app.post('/flush', async function(req, res) {
 })
 
 app.get('/', async function(req, res) {
-    const lastest_episode = await get_s3_json_data(`${root}latest.episode.json`);
-    res.render('pages/index', {episode: lastest_episode})
+    const latest_episode = await get_s3_json_data(`${root}latest.episode.json`);
+    const blogs = [
+        {
+            "title": "TAT",
+            "author": "Lan",
+            "description": "a",
+            "url": "https://dataskeptic.com/blog/?"
+        }, {
+            "title": "TBT",
+            "author": "George",
+            "description": "b",
+            "url": "https://dataskeptic.com/blog/?"
+        }, {
+            "title": "TTT",
+            "author": "Kyle",
+            "description": "c",
+            "url": "https://dataskeptic.com/blog/?"
+        }
+    ]
+    console.log({latest_episode})
+    res.render('pages/index', {episode: latest_episode, blogs})
 })
 
 
@@ -134,7 +153,7 @@ app.get('/donate', async (req, res) => {
     res.render('pages/donate');
 });
 
-app.get('/podcasts', async (req, res) => {
+app.get('/podcasts/dataskeptic', async (req, res) => {
     const title = "Data Skeptic: Interpretability";
     const episodes = await get_episodes('episodes/2020/');
     res.render('pages/podcasts', {title, episodes});
@@ -192,6 +211,10 @@ app.get('/podcasts/2014', async (req, res) => {
     const title = "Data Skeptic: 2014";
     const episodes = await get_episodes('episodes/2014/');
     res.render('pages/podcasts', {title, episodes});
+});
+
+app.get('/podcasts/jclub', async (req, res) => {
+    res.render('pages/jc/jclub');
 });
 
 app.get('/blog/*', function(req, res) {
