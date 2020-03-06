@@ -42,24 +42,8 @@ app.post('/flush', async function(req, res) {
 
 app.get('/', async function(req, res) {
     const latest_episode = await get_s3_json_data(`${root}latest.episode.json`);
-    const blogs = [
-        {
-            "title": "TAT",
-            "author": "Lan",
-            "description": "a",
-            "url": "https://dataskeptic.com/blog/?"
-        }, {
-            "title": "TBT",
-            "author": "George",
-            "description": "b",
-            "url": "https://dataskeptic.com/blog/?"
-        }, {
-            "title": "TTT",
-            "author": "Kyle",
-            "description": "c",
-            "url": "https://dataskeptic.com/blog/?"
-        }
-    ]
+    const latest_blogs = await get_s3_json_data(`${root}latest.blogs.json`);
+    const blogs = latest_blogs
     console.log({latest_episode})
     res.render('pages/index', {episode: latest_episode, blogs})
 })
