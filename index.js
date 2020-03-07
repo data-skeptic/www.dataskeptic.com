@@ -134,6 +134,10 @@ app.get('/donate', async (req, res) => {
     res.render('pages/donate');
 });
 
+app.get('/privacy-policy', async (req, res) => {
+    res.render('pages/privacy-policy');
+});
+
 app.get('/podcasts', async (req, res) => {
     const title = "Data Skeptic: Interpretability";
     const episodes = await get_episodes('episodes/2020/');
