@@ -69,10 +69,33 @@ h2 { font-size: 16pt; }
 
 
 
-
-.blog-small {
-  border-bottom: 1px solid #ccc;
+.SkepticPlayer {
+  position: relative;
+  width: 50%;
+  border-radius: 10rem;
 }
+.SkepticPlayer .SkepticPlayer-Artwork {
+  bottom: 0.5rem;
+}
+.SkepticPlayer .SkepticPlayer-Artwork > * {
+  border-radius: 10rem;
+}
+.SkepticPlayer .SkepticPlayer-Progress {
+  left: 6rem;
+  width: calc(100% - 9rem);
+}
+.SkepticPlayer .SkepticPlayer-Controls {
+  bottom: 1.7rem;
+  right: 0.5rem;
+  height: auto;
+}
+.SkepticPlayer .SkepticPlayer-Controls > * {
+  box-shadow: none;
+}
+.SkepticPlayer .SkepticPlayer-Controls .SkepticPlayer-Button-Backward, .SkepticPlayer .SkepticPlayer-Controls .SkepticPlayer-Button-Forward {
+  margin-top: calc(1rem / 1.3 + 0.3rem);
+}
+
 
 
 
