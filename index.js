@@ -236,6 +236,10 @@ app.get('/blog/*', function(req, res) {
 
 // TODO: create a honeypot for /wp/wp-admin/ requests
 
+app.get('/ads.txt', (req, res) =>
+    res.send('google.com, pub-9618988589932555, DIRECT, f08c47fec0942fa0')
+);
+
 app.get('*', (req, res) => res.send('Page Not found 404'));
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
