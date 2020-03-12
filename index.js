@@ -137,7 +137,11 @@ app.get('/donate', async (req, res) => {
     res.render('pages/donate');
 });
 
-app.get('/podcasts/dataskeptic', async (req, res) => {
+app.get('/privacy-policy', async (req, res) => {
+    res.render('pages/privacy-policy');
+});
+
+app.get('/podcasts', async (req, res) => {
     const title = "Data Skeptic: Interpretability";
     const episodes = await get_episodes('episodes/2020/');
     res.render('pages/podcasts', {title, episodes});
@@ -238,6 +242,10 @@ app.get('/blog/*', function(req, res) {
 });
 
 // TODO: create a honeypot for /wp/wp-admin/ requests
+
+app.get('/ads.txt', (req, res) =>
+    res.send('google.com, pub-9618988589932555, DIRECT, f08c47fec0942fa0')
+);
 
 app.get('*', (req, res) => res.send('Page Not found 404'));
 
