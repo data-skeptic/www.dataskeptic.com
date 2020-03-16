@@ -20,18 +20,6 @@
   </div>
 </div>
 
-<style>
-    .SkepticPlayer {
-        background-color: #ddd;
-        position: relative;
-        max-width: 400px;
-        margin-left: 300px;
-    }
-    .wrapz {
-      padding: 10px;
-    }
-</style>
-
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
@@ -40,18 +28,14 @@
         <h3><%= episode.title %></h3>
         <p><%= episode.abstract %></p>
         <div class="wrapz">
-          <div class="SkepticPlayer">
-                      <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.mp3_url %>" title="<%= episode.title %>" artist="Data Skeptic Podcast" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
-          </div>
+          <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.mp3_url %>" title="<%= episode.title %>" artist="Data Skeptic Podcast" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
         </div>
       </div>
       <div class="podcast-small">
         <h3>Introducing Journal Club</h3>
         <p>Check out the first episode of Journal Club.</p>
         <div class="wrapz">
-          <div class="SkepticPlayer">
-                      <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="http://traffic.libsyn.com/journalclub/Chess_Transformer_Kaggle_Scandal_and-Interpretability-Zoo.mp3" title="Chess Transformer, Kaggle Scandal, and Interpretability Zoo" artist="Data Skeptic: Journal Club" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
-          </div>
+            <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="http://traffic.libsyn.com/journalclub/Chess_Transformer_Kaggle_Scandal_and-Interpretability-Zoo.mp3" title="Chess Transformer, Kaggle Scandal, and Interpretability Zoo" artist="Data Skeptic: Journal Club" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
         </div>
       </div>
     </div>
