@@ -41,7 +41,9 @@ app.post('/flush', async function(req, res) {
 })
 
 app.get('/', async function(req, res) {
+    console.log({root})
     const latest_episode = await get_s3_json_data(`${root}latest.episode.json`);
+    console.log({latest_episode})
     const latest_blogs = await get_s3_json_data(`${root}latest.blogs.json`);
     const blogs = latest_blogs
     console.log({latest_episode})
