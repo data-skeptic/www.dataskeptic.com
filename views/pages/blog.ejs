@@ -10,9 +10,7 @@
 
 <% if (episode !== undefined) { %>
 <div class="container">
-  <audio controls="controls">
-    <source src="<%= episode.mp3_url %>" />
-  </audio>
+  <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.mp3_url %>" artwork="<%= episode.album_cover %>" title="<%= episode.title %>"></script>
 </div>
 <% } %>
 
