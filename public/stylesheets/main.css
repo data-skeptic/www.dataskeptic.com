@@ -95,6 +95,7 @@ h2 { font-size: 16pt; }
 }
 .SkepticPlayer .SkepticPlayer-Controls > * {
   box-shadow: none!important;
+  background-color:#fff;
 }
 .SkepticPlayer .SkepticPlayer-Controls .SkepticPlayer-Button-Backward, .SkepticPlayer .SkepticPlayer-Controls .SkepticPlayer-Button-Forward {
   margin-top: calc(1rem / 1.3 + 0.3rem)!important;
