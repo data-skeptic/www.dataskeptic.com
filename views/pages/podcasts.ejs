@@ -22,6 +22,9 @@
             <%= episode.abstract %> ...
             <a href="/blog/<%= episode.path %>">[more]</a>
           </p>
+          <div className="player">
+            <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.mp3_url %>" artwork="<%= episode.album_cover %>" title="<%= episode.title %>" artist="<%= episode.author %>"></script>
+          </div>
         </div>
       </div>
       <div><br /></div>
