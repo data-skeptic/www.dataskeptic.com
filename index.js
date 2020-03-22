@@ -41,8 +41,13 @@ app.post('/flush', async function(req, res) {
 })
 
 app.get('/', async function(req, res) {
-    const lastest_episode = await get_s3_json_data(`${root}latest.episode.json`);
-    res.render('pages/index', {episode: lastest_episode})
+    console.log({root})
+    const latest_episode = await get_s3_json_data(`${root}latest.episode.json`);
+    console.log({latest_episode})
+    const latest_blogs = await get_s3_json_data(`${root}latest.blogs.json`);
+    const blogs = latest_blogs
+    console.log({latest_episode})
+    res.render('pages/index', {episode: latest_episode, blogs})
 })
 
 
@@ -138,7 +143,7 @@ app.get('/privacy-policy', async (req, res) => {
     res.render('pages/privacy-policy');
 });
 
-app.get('/podcasts', async (req, res) => {
+app.get('/podcasts/dataskeptic', async (req, res) => {
     const title = "Data Skeptic: Interpretability";
     const episodes = await get_episodes('episodes/2020/');
     res.render('pages/podcasts', {title, episodes});
@@ -196,6 +201,10 @@ app.get('/podcasts/2014', async (req, res) => {
     const title = "Data Skeptic: 2014";
     const episodes = await get_episodes('episodes/2014/');
     res.render('pages/podcasts', {title, episodes});
+});
+
+app.get('/podcasts/jclub', async (req, res) => {
+    res.render('pages/jc/jclub');
 });
 
 app.get('/blog/*', function(req, res) {
