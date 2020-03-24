@@ -85,9 +85,6 @@ h2 { font-size: 16pt; }
   border-radius: 10rem!important;
 }
 .SkepticPlayer .SkepticPlayer-Progress {
-  bottom: 1.5rem;
-  left: 6rem;
-  width: calc(100% - 8rem);
   height: 100%;
   width: 100%;
   top: 0;
