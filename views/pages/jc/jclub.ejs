@@ -39,21 +39,40 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-6">
-    <a href='https://playmusic.app.goo.gl/?ibi=com.google.PlayMusic&amp;isi=691797987&amp;ius=googleplaymusic&amp;apn=com.google.android.music&amp;link=https://play.google.com/music/m/Igkfx65qbsvytowwk2xlkogkemm?t%3DJournal_Club%26pcampaignid%3DMKT-na-all-co-pr-mu-pod-16' rel='nofollow'><img width='125px' alt='Listen on Google Play Music' src='https://play.google.com/intl/en_us/badges-music/images/badges/en_badge_web_music.png'/></a>
-  </div>
-  <div class="col-sm-6">
-    <a href="https://podcasts.apple.com/us/podcast/journal-club/id1503082990">iTunes</a>
-  </div>
-</div>
+<br/><br/>
 
 <div class="container">
-  <h2>Episodes</h2>
-  <p>Episode #1: <a href="https://dataskeptic.com/blog/journalclub/2020/chess-transformer-kaggle-scandal-interpretability-zoo">Chess Transformer, Kaggle Scandal, and Interpretability Zoo</a>
-  <p>Episode #2: <a href="https://dataskeptic.com/blog/journalclub/2020/albert-seinfeld-and-explainable-ai">AlBert, Seinfeld, and Explainable AI</a>
-  <p>Episode #3: <a href="https://dataskeptic.com/blog/journalclub/2020/googles-new-data-engine-activation-atlas-and-lime">Google's New Data Engine, Activation Atlas, and Lime</a>
-  <p>Episode #4: <a href="https://dataskeptic.com/blog/journalclub/2020/alphago-covid-19-contact-tracing-and-new-data-set">AlphaGo, COVID-19 Contact Tracing and New Data Set</a>
+<div class="row">
+  <div class="col-sm-6">
+    <center><a href='https://playmusic.app.goo.gl/?ibi=com.google.PlayMusic&amp;isi=691797987&amp;ius=googleplaymusic&amp;apn=com.google.android.music&amp;link=https://play.google.com/music/m/Igkfx65qbsvytowwk2xlkogkemm?t%3DJournal_Club%26pcampaignid%3DMKT-na-all-co-pr-mu-pod-16' rel='nofollow'><img height='70px' alt='Listen on Google Play Music' src='https://play.google.com/intl/en_us/badges-music/images/badges/en_badge_web_music.png'/></a></center>
+  </div>
+  <div class="col-sm-6">
+    <center><a href="https://podcasts.apple.com/us/podcast/journal-club/id1503082990"><img height='70px' src="http://s3.amazonaws.com/dataskeptic.com/imgs/listen-on-apple-podcasts.png" /></a></center>
+  </div>
+</div>
+</div>
+
+<br/><br/>
+
+<div class="container">
+    <% for (const episode of episodes) { %>
+      <div class="podcast_summary">
+        <div class="left">
+          <img class="album_art" src="<%= episode.album_cover %>" />
+        </div>
+        <div class="right">
+          <h2><%= episode.title %></h2>
+          <p>
+            <%= episode.abstract %> ...
+            <a href="/blog/<%= episode.path %>">[more]</a>
+          </p>
+          <div className="player">
+            <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.mp3_url %>" artwork="<%= episode.album_cover %>" title="<%= episode.title %>" artist="<%= episode.author %>"></script>
+          </div>
+        </div>
+      </div>
+      <div><br /></div>
+    <% } %>
 </div>
 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
