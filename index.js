@@ -37,7 +37,7 @@ app.get('/survey', (req, res) => res.redirect(301, 'https://docs.google.com/form
 
 app.get('/meetup', (req, res) => res.redirect(301, 'https://www.meetup.com/Data-Skeptic/'))
 
-app.get('/live', (req, res) => res.redirect(301, 'https://www.meetup.com/Data-Skeptic/events/270209978/'))
+app.get('/live', (req, res) => res.redirect(301, 'https://www.youtube.com/watch?v=4cFAH1Eji2U'))
 
 app.post('/flush', async function(req, res) {
     cache.flush();
