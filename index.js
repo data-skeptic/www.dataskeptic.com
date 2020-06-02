@@ -18,7 +18,7 @@ var app = express();
 const root = 'user/test/apps/publishingtools/outbox/data-skeptic/blog/master/'
 
 // Don't redirect if the hostname is `localhost:port` or the route is `/insecure`
-//app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
+//app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 307));
 
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -31,17 +31,17 @@ app.use(function (err, req, res, next) {
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
-app.get('/feed.rss', (req, res) => res.redirect(301, 'http://dataskeptic.libsyn.com/rss'))
+app.get('/feed.rss', (req, res) => res.redirect(307, 'http://dataskeptic.libsyn.com/rss'))
 
-app.get('/survey', (req, res) => res.redirect(301, 'https://docs.google.com/forms/d/e/1FAIpQLSc7SbmG04zJFxrDsMH0uIm1geqKwDSJ6P3gq3oGl_9T251Pww/viewform'))
+app.get('/survey', (req, res) => res.redirect(307, 'https://docs.google.com/forms/d/e/1FAIpQLSc7SbmG04zJFxrDsMH0uIm1geqKwDSJ6P3gq3oGl_9T251Pww/viewform'))
 
-app.get('/meetup', (req, res) => res.redirect(301, 'https://www.meetup.com/Data-Skeptic/'))
+app.get('/meetup', (req, res) => res.redirect(307, 'https://www.meetup.com/Data-Skeptic/'))
 
-app.get('/live', (req, res) => res.redirect(301, 'https://www.youtube.com/watch?v=4cFAH1Eji2U'))
+app.get('/live', (req, res) => res.redirect(307, 'https://www.youtube.com/watch?v=4cFAH1Eji2U'))
 
 app.post('/flush', async function(req, res) {
     cache.flush();
-    res.redirect(301, '/')
+    res.redirect(307, '/')
 })
 
 app.get('/', async function(req, res) {
