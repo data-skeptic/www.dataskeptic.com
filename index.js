@@ -135,6 +135,10 @@ app.get('/advertising', async (req, res) => {
     res.render('pages/advertising');
 });
 
+app.get('/consulting', async (req, res) => {
+    res.render('pages/consulting');
+});
+
 app.get('/donate', async (req, res) => {
     res.render('pages/donate');
 });
