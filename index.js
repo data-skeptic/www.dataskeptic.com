@@ -135,6 +135,14 @@ app.get('/advertising', async (req, res) => {
     res.render('pages/advertising');
 });
 
+app.get('/careers/sales-engineer', async (req, res) => {
+    res.render('pages/careers/sales-engineer');
+});
+
+app.get('/careers', async (req, res) => {
+    res.render('pages/careers');
+});
+
 app.get('/donate', async (req, res) => {
     res.render('pages/donate');
 });
