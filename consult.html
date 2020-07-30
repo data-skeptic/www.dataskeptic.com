@@ -77,6 +77,10 @@
         align-items: center;
         justify-content: center;
     }
+    .topcenter {
+        margin-top: auto;
+margin-bottom: auto;
+    }
     .hero-header::before {
       content: "";
         background-image: url('https://s3.amazonaws.com/dataskeptic.com/consulting/hero_bg_01.jpg');
@@ -88,15 +92,101 @@
       left: 0px;
       opacity: 0.25;
     }
+    .hero-button {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        width: 100%;
+        position: relative;
+        background: #1CA8FB;
+        margin-bottom: 25px;
+        border-radius: 32px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.1s ease-in-out;
+        span {
+          line-height: 100px;
+          font-family: "Montserrat", sans-serif;
+          font-size: 32px;
+          font-weight: semibold;
+        }
+        &:nth-child(1) {
+          box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+            6px 6px 10px rgba(0, 0, 0, 0.2);
+          color: #6f6cde;
+          &:hover {
+            opacity: 0.3;
+            box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+              6px 6px 10px rgba(0, 0, 0, 0.2);
+          }
+          &:active {
+            opacity: 1;
+            box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+              inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+            color: #79e3b6;
+          }
+        }
+        &:nth-child(2) {
+          opacity: 0.3;
+          box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+            6px 6px 10px rgba(0, 0, 0, 0.2);
+          color: #6f6cde;
+        }
+        &:nth-child(3) {
+          box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+            inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+          color: #79e3b6;
+          &:hover {
+            opacity: 1;
+            box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+              6px 6px 10px rgba(0, 0, 0, 0.2);
+          }
+        }
+    }
 </style>
+
+<script> 
+    // Define selector for selecting 
+    // anchor links with the hash 
+    let anchorSelector = 'a[href^="#"]'; 
+  
+    // Collect all such anchor links 
+    let anchorList =  
+        document.querySelectorAll(anchorSelector); 
+      
+    // Iterate through each of the links 
+    anchorList.forEach(link => { 
+        link.onclick = function (e) { 
+  
+            // Prevent scrolling if the 
+            // hash value is blank 
+            e.preventDefault(); 
+      
+            // Get the destination to scroll to 
+            // using the hash property 
+            let destination =  
+                document.querySelector(this.hash); 
+      
+            // Scroll to the destination using 
+            // scrollIntoView method 
+            destination.scrollIntoView({ 
+                behavior: 'smooth' 
+            }); 
+        } 
+    }); 
+    </script> 
+
 
 <div id="home" class="hero-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-md-7">
                 <div class="fp__mb-40">
-                    <h2 class="hero-title">Ready for to maximize your data?</h2>
-                    <p class="hero-text">Find out how Data Skeptic can help solve your most challenging data science and machine learning projects.</p>
+                    <h2 class="hero-title">Data Skeptic is your next-generation consulting group.</h2>
+                    <p class="hero-text">We help you achieve business goals by identifying key opportunities, so you can make actionable decisions.  By leveraging data science, machine learning, and artificial intelligence, we take you from conception, full execution, and deployment.  We use data, the human experience, and technology to add value.</p>
+
+                    <p class="hero-text">We are a software development company helping businesses maximize their potential with scalable, automated solutions and insights.</p>
                     <!--
                     <div class="play-button-group">
                         <a href="https://www.youtube.com/watch?v=HSsqzzuGTPo" class="video-popup video-play-btn primary"></a>
@@ -104,6 +194,9 @@
                     </div>
                     -->
                 </div>
+            </div>
+            <div class="topcenter col-lg-5 col-md-5">
+                <a href="#contactus"><button class="hero-button">Contact Us</button></a>
             </div>
         </div>
     </div>
@@ -249,48 +342,61 @@
             </div>
         </div>
     </section>
+-->
 
     <section class="section bg-light-grey">
         <div class="container">
             <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h2>WHY DATA SKEPTIC CONSULTING?</h2>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="video-frame">
-                        <a href="https://www.youtube.com/watch?v=hNQFjqDvPhA" class="video-popup fp__video" style="background-image: url('https://s3.amazonaws.com/dataskeptic.com/consulting/video_bg_01.jpg')">
+                        <a href="https://www.youtube.com/watch?v=hNQFjqDvPhA" class="video-popup fp__video" style="background-image: url('https://s3.amazonaws.com/dataskeptic.com/consulting/stock.jpg')">
                             <span class="play-btn">&nbsp;</span>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-1 col-md-1"></div>
+                <div class="col-lg-1 col-md-1">
+                </div>
                 <div class="col-lg-5 col-md-5">
                     <div class="text-box-with-icon d-flex">
-                        <span class="fp__icon la la-diamond"></span>
+                        <span class="fp__icon la la-anchor"></span>
                         <div class="box-texts">
-                            <h4 class="box-title">Clean Design</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit Aut iusto</p>
+                            <h4 class="box-title">We're knowledgeable experts with industry experience</h4>
+                            <p>Host of the #1 Data Science podcast on iTunes for 5+ years with over 10M downloads</p>
                         </div>
                     </div>
                     <div class="text-box-with-icon d-flex">
                         <span class="fp__icon la la-cogs"></span>
                         <div class="box-texts">
-                            <h4 class="box-title">Easy to Customize</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit Aut iusto</p>
+                            <h4 class="box-title">We build custom solutions</h4>
+                            <p>There is no one-size-fits-all.  No business is the same; we understand your custom goals and unique challenges.  Our models are tailor-made, based on your specific needs.</p>
                         </div>
                     </div>
                     <div class="text-box-with-icon d-flex">
-                        <span class="fp__icon la la-html5"></span>
+                        <span class="fp__icon la la-rocket"></span>
                         <div class="box-texts">
-                            <h4 class="box-title">HTML5 Validate</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit Aut iusto</p>
+                            <h4 class="box-title">We work with Bleeding Edge Technology</h4>
+                            <p>We use cutting edge technology powered by the cloud and informed by research.</p>
+                        </div>
+                    </div>
+                    <div class="text-box-with-icon d-flex">
+                        <span class="fp__icon la la-line-chart"></span>
+                        <div class="box-texts">
+                            <h4 class="box-title">We're motivated to help your business grow</h4>
+                            <p>We take pride in building the best-in-class solutions that help your business grow and scale.  We take pride in making a measurable impact on your business.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
--->
 </div>
 
-<section id="pricing" class="section bg-light-grey">
+<section id="pricing" class="section">
     <div class="container">
         <div class="section-header text-center">
             <div class="row">
@@ -395,33 +501,16 @@
 </section>
 -->
 
-<section class="section">
+<a name="contactus"/>
+<section class="section bg-light-grey">
     <div class="container">
         <div class="section-header text-center">
-
-
-        <div class="row">
-            <div class="col-md-7 mx-auto">
-
-                        <h3>Our Podcast</h3>
-                        <p class="section-header-text">Hear our CSO's thoughts on the Data Skeptic podcast</p>
-                            <a type="button" class="btn btn-lg btn-default" href="https://podcasts.apple.com/us/podcast/data-skeptic/id890348705"><span class="glyphicon glyphicon-apple"></span>Listen on iTunes</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://www.stitcher.com/podcast/data-skeptic-podcast/the-data-skeptic-podcast"><span class="glyphicon glyphicon-triangle-right"></span>Listen on Stitcher</a>
-                        <br/><br/><br/>
-                        <br/><br/><br/>
-
-            </div>
-        </div>
-
-
-
-                <a name="contactus"/>
             <div class="row">
                 <div class="col-lg-7 mx-auto col-md-8">
                 <form action="#" class="reg-form fp__mb-40">
                     <div class="reg-form-header">
-                        <h3 class="form-title">How can we help?</h3>
-                        <p>Let's start a conversation about your business.</p>
+                        <h3 class="form-title">Ready for to maximize your data?</h3>
+                        <p>Find out how Data Skeptic can help solve your most challenging data science and machine learning projects.</p>
                     </div>
                     <div class="cognito"> <script src="https://www.cognitoforms.com/s/agMj6GZ9C0i9IAhRogxsAg"></script> <script>Cognito.load("forms", { id: "1" });</script> </div>
                 </form>
