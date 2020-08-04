@@ -49,6 +49,16 @@ app.get('/consulting', async function(req, res) {
     });
 })
 
+app.get('/consulting2', async function(req, res) {
+    var getParams = {
+        Bucket: "dataskeptic.com",
+        Key: "consult2.html"
+    }
+    s3.getObject(getParams, function(err, data) {
+        res.send(data.Body.toString('utf-8'));
+    });
+})
+
 app.post('/flush', async function(req, res) {
     cache.flush();
     res.redirect(307, '/')
