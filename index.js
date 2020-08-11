@@ -40,24 +40,30 @@ app.get('/meetup', (req, res) => res.redirect(307, 'https://www.meetup.com/Data-
 app.get('/live', (req, res) => res.redirect(307, 'https://www.youtube.com/watch?v=4cFAH1Eji2U'))
 
 app.get('/consulting', async function(req, res) {
-    var getParams = {
-        Bucket: "dataskeptic.com",
-        Key: "consult.html"
-    }
-    s3.getObject(getParams, function(err, data) {
-        res.send(data.Body.toString('utf-8'));
-    });
+    res.render('pages/consulting');
+    // var getParams = {
+    //     Bucket: "dataskeptic.com",
+    //     Key: "consult.html"
+    // }
+    // s3.getObject(getParams, function(err, data) {
+    //     res.send(data.Body.toString('utf-8'));
+    // });
 })
 
 app.get('/consulting2', async function(req, res) {
-    var getParams = {
-        Bucket: "dataskeptic.com",
-        Key: "consult2.html"
-    }
-    s3.getObject(getParams, function(err, data) {
-        res.send(data.Body.toString('utf-8'));
-    });
+    res.render('pages/consulting2');
+    // var getParams = {
+    //     Bucket: "dataskeptic.com",
+    //     Key: "consult2.html"
+    // }
+    // s3.getObject(getParams, function(err, data) {
+    //     res.send(data.Body.toString('utf-8'));
+    // });
 })
+
+app.get('/shopify', async (req, res) => {
+    res.render('pages/shopify');
+});
 
 app.post('/flush', async function(req, res) {
     cache.flush();
