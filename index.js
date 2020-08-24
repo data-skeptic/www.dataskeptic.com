@@ -15,7 +15,7 @@ var app = express();
 
 //var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
-const root = 'user/test/apps/publishingtools/outbox/data-skeptic/blog/master/'
+const root = 'user/kyle@dataskeptic.com/dataskeptic/blog/mirror/master/'
 
 // Don't redirect if the hostname is `localhost:port` or the route is `/insecure`
 //app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 307));
