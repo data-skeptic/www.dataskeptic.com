@@ -178,7 +178,7 @@ app.get('/privacy-policy', async (req, res) => {
 });
 
 app.get('/podcasts/dataskeptic', async (req, res) => {
-    const title = "Data Skeptic: Interpretability";
+    const title = "Data Skeptic";
     const episodes = await get_episodes('episodes/2020/');
     res.render('pages/podcasts', {title, episodes});
 });
