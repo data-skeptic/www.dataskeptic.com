@@ -61,6 +61,16 @@ app.get('/consulting2', async function(req, res) {
     // });
 })
 
+app.get('/lp/help', async function(req, res) {
+    var getParams = {
+        Bucket: "dataskeptic.com",
+        Key: "lp/help/index.html"
+    }
+    s3.getObject(getParams, function(err, data) {
+        res.send(data.Body.toString('utf-8'));
+    });
+})
+
 app.get('/shopify', async (req, res) => {
     res.render('pages/shopify');
 });
