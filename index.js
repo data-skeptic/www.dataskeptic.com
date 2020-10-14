@@ -61,12 +61,21 @@ app.get('/consulting2', async function(req, res) {
     // });
 })
 
-app.get('/lp/help', async function(req, res) {
+app.get('/lp(/*)?', async function(req, res) {
+    let url = req.originalUrl.substring(3, req.originalUrl.length)
+    if (url.endsWith('/')) {
+        url += 'index.html'
+    }
     var getParams = {
         Bucket: "dataskeptic.com",
-        Key: "lp/help/index.html"
+        Key: "lp" + url
     }
     s3.getObject(getParams, function(err, data) {
+        if (err) {
+            console.log(err)
+            res.render('pages/error')
+            return err;            
+        }
         res.send(data.Body.toString('utf-8'));
     });
 })
