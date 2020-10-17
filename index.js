@@ -61,8 +61,11 @@ app.get('/consulting2', async function(req, res) {
     // });
 })
 
-app.get('/lp(/*)?', async function(req, res) {
+app.get(['/lp', '/lp*'], async function(req, res) {
     let url = req.originalUrl.substring(3, req.originalUrl.length)
+    if (url.indexOf('/', 1) == -1) {
+        url += '/'
+    }
     if (url.endsWith('/')) {
         url += 'index.html'
     }
