@@ -4,18 +4,18 @@ const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
-var s3 = new AWS.S3({region: 'us-west-2'});
+var s3 = new AWS.S3({region: 'us-east-1'});
 
 
 cache.init({ ttl: 60 * 60 * 3, interval: 1, randomize: false });
 
-const bucket_name = "serverless-crawl";
+const bucket_name = "feaas-prod";
 
 var app = express();
 
 //var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
-const root = 'user/kyle@dataskeptic.com/dataskeptic/blog/mirror/master/'
+const root = 'user/kyle@dataskeptic.com/dataskeptic/pub/blog/'
 
 // Don't redirect if the hostname is `localhost:port` or the route is `/insecure`
 //app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 307));
@@ -93,10 +93,8 @@ app.post('/flush', async function(req, res) {
 })
 
 app.get('/', async function(req, res) {
-    const latest_episode = await get_s3_json_data(`${root}latest.episode.json`);
-    const latest_blogs = await get_s3_json_data(`${root}latest.blogs.json`);
-    const blogs = latest_blogs
-    res.render('pages/index', {episode: latest_episode, blogs})
+    const latest_episode = await get_s3_json_data(`${root}latest-episode.json`);
+    res.render('pages/index', {episode: latest_episode})
 })
 
 
