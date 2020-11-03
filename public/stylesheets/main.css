@@ -1,7 +1,7 @@
 .jumbotron {
       background: url("https://s3.amazonaws.com/dataskeptic.com/imgs/ds_background_2020.png") center center / cover no-repeat;
   color: white;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
 }
 .jumbotron .btn-primary {
     background: #845ac7;
@@ -32,6 +32,13 @@
       max-width: 100%;
 }
 
+.home_logo {
+      max-width: 100%;
+}
+
+.recent_date {
+  font-size: 8pt;
+}
 
 h1 { font-size: 32pt; text-align: center; }
 h2 { font-size: 16pt; }

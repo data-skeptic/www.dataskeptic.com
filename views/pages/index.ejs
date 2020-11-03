@@ -16,15 +16,15 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-4">
-      <center><img src="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg"></center>
+    <div class="col-sm-3">
+      <center><img class="home_logo" src="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg"></center>
       <br/>
       <p>Your trusted podcast, centered on data science, machine learning, and artificial intelligence.</p>
       <p>Tune in weekly for the latest interviews with leading experts.</p>
       <a type="button" class="btn btn-lg btn-default" href="https://podcasts.apple.com/us/podcast/data-skeptic/id890348705"><span class="glyphicon glyphicon-apple"></span>Listen on iTunes</a>
       <a type="button" class="btn btn-lg btn-primary" href="https://www.stitcher.com/podcast/data-skeptic-podcast/the-data-skeptic-podcast"><span class="glyphicon glyphicon-triangle-right"></span>Listen on Stitcher</a>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-6">
       <h2>Latest Podcast</h2>
       <div class="podcast-small">
         <h3><%= episode.title %> (<%= episode.itunes_duration %>)</h3>
@@ -33,6 +33,12 @@
           <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.mp3_url %>" title="<%= episode.title %>" artist="Data Skeptic Podcast" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
         </div>
       </div>
+    </div>
+    <div class="col-sm-3">
+      <h3>Recent</h3>
+      <% for(const blog of blogs) { %>
+        <div><b><a href="<%= blog.link %>"><%= blog.title %></b></a><span class="recent_date"> - <%= blog.dt %></span></div>
+      <% } %>
     </div>
     
   </div>

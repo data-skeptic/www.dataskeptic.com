@@ -93,15 +93,36 @@ app.post('/flush', async function(req, res) {
 })
 
 app.get('/', async function(req, res) {
-    const latest_episode = await get_s3_json_data(`${root}latest-episode.json`);
-    res.render('pages/index', {episode: latest_episode})
+    const episode = await get_s3_json_data(`${root}latest-episode.json`);
+    const blogdata = await get_s3_json_data(`${root}latest-blogs.json`, []);
+    const blogs = blogdata['blogs'];
+    for (const blog of blogs) {
+        const date = new Date(blog['timestamp'])
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        month = (month < 10 ? "0" : "") + month;
+        day = (day < 10 ? "0" : "") + day;
+        hour = (hour < 10 ? "0" : "") + hour;
+        min = (min < 10 ? "0" : "") + min;
+        sec = (sec < 10 ? "0" : "") + sec;
+        var str = date.getFullYear() + "-" + month + "-" + day;
+        blog['dt'] = str;
+        link = blog['link'];
+        if (link.startsWith("http://dataskeptic.com")) {
+            blog['link'] = link.substring(22);
+        }
+    }
+    res.render('pages/index', {episode, blogs})
 })
 
 
 app.get('/login', (req, res) => res.render('pages/login'))
 
 
-async function get_s3_json_data(key) {
+async function get_s3_json_data(key, null_val=null) {
     var getParams = {
         Bucket: bucket_name,
         Key: key
@@ -119,7 +140,7 @@ async function get_s3_json_data(key) {
     }
     if (data === undefined) {
         console.log(`No key named ${key} in ${bucket_name}`)
-        return undefined;
+        return null_val;
     }
     const s = data.Body.toString('utf-8');
     return JSON.parse(s);
@@ -269,6 +290,7 @@ app.get('/blog/*', function(req, res) {
         key = key + ".html";
     }
     key = root + key.substring(6, key.length)
+    console.log({key})
     const metadata_key = key.substring(0, key.length - 5) + ".episode.json"
     var getParams = {
         Bucket: bucket_name,
