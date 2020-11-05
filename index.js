@@ -95,15 +95,11 @@ app.post('/flush', async function(req, res) {
 app.get('/', async function(req, res) {
     const episode = await get_s3_json_data(`${root}latest-episode.json`);
     if (episode['guests']) {
-        console.log({episode})
         for (const guests of episode['guests']) {
             console.log({guests})
         }
     }
-    if (episode['enclosure_url']) {
-        console.log({req})
-        console.log(episode['enclosure_url'])
-    }
+    console.log({episode})
     const blogdata = await get_s3_json_data(`${root}latest-blogs.json`, []);
     const blogs = blogdata['blogs'];
     for (const blog of blogs) {
