@@ -117,11 +117,13 @@ app.get('/', async function(req, res) {
         var str = date.getFullYear() + "-" + month + "-" + day;
         blog['dt'] = str;
         link = blog['link'];
-        if (link.startsWith("http://dataskeptic.com")) {
-            blog['link'] = link.substring(22);
-        }
-        if (link.startsWith("https://dataskeptic.com")) {
-            blog['link'] = link.substring(23);
+        if (link) {
+            if (link.startsWith("http://dataskeptic.com")) {
+                blog['link'] = link.substring(22);
+            }
+            if (link.startsWith("https://dataskeptic.com")) {
+                blog['link'] = link.substring(23);
+            }            
         }
     }
     res.render('pages/index', {episode, blogs})
