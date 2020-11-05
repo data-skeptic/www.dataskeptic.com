@@ -100,6 +100,10 @@ app.get('/', async function(req, res) {
             console.log({guests})
         }
     }
+    if (episode['enclosure_url']) {
+        console.log({req})
+        console.log(episode['enclosure_url'])
+    }
     const blogdata = await get_s3_json_data(`${root}latest-blogs.json`, []);
     const blogs = blogdata['blogs'];
     for (const blog of blogs) {
