@@ -5,7 +5,7 @@ const path = require('path')
 const PORT = process.env.PORT || 5000
 
 var s3 = new AWS.S3({region: 'us-east-1'});
-
+var dynamo = new AWS.DynamoDB({region: 'us-east-1'});
 
 cache.init({ ttl: 60 * 60 * 3, interval: 1, randomize: false });
 
@@ -94,12 +94,15 @@ app.post('/flush', async function(req, res) {
 
 app.get('/', async function(req, res) {
     const episode = await get_s3_json_data(`${root}latest-episode.json`);
+    const guests = []
     if (episode['guests']) {
-        for (const guests of episode['guests']) {
-            console.log({guests})
+        for (const guest_id of episode['guests']) {
+            const object_id = "kyle@dataskeptic.com/stream.com.dataskeptic.blog.guest." + guest_id
+            guest = await get_dynamo_object(object_id)
+            guests.push(guest)
         }
     }
-    console.log({episode})
+    console.log(JSON.stringify(guests))
     const blogdata = await get_s3_json_data(`${root}latest-blogs.json`, []);
     const blogs = blogdata['blogs'];
     for (const blog of blogs) {
@@ -126,12 +129,36 @@ app.get('/', async function(req, res) {
             }            
         }
     }
-    res.render('pages/index', {episode, blogs})
+    res.render('pages/index', {episode, blogs, guests})
 })
 
 
 app.get('/login', (req, res) => res.render('pages/login'))
 
+
+async function get_dynamo_object(object_id) {
+    var params = {
+        TableName: 'feaas-docstore-prod',
+        Key: { 'object_id': {'S': object_id }}
+    }
+    try{
+        data = await dynamo.getItem(params).promise()
+        const result = {}
+        if (data['Item']) {
+            for (const k of Object.keys(data['Item'])) {
+                const db_v = data['Item'][k]
+                console.log({db_v})
+                const v = Object.values(db_v)[0]
+                console.log({v})
+                result[k] = v
+            }
+        }
+        return result
+    } catch (err) {
+        console.log(err)
+    }
+    return undefined;
+}
 
 async function get_s3_json_data(key, null_val=null) {
     var getParams = {
@@ -301,7 +328,6 @@ app.get('/blog/*', function(req, res) {
         key = key + ".html";
     }
     key = root + key.substring(6, key.length)
-    console.log({key})
     const metadata_key = key.substring(0, key.length - 5) + ".episode.json"
     var getParams = {
         Bucket: bucket_name,

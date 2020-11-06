@@ -24,17 +24,37 @@
       <a type="button" class="btn btn-lg btn-default" href="https://podcasts.apple.com/us/podcast/data-skeptic/id890348705"><span class="glyphicon glyphicon-apple"></span>Listen on iTunes</a>
       <a type="button" class="btn btn-lg btn-primary" href="https://www.stitcher.com/podcast/data-skeptic-podcast/the-data-skeptic-podcast"><span class="glyphicon glyphicon-triangle-right"></span>Listen on Stitcher</a>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       <h2>Latest Podcast</h2>
       <div class="podcast-small">
         <h3><%= episode.title %> (<%= episode.itunes_duration %>)</h3>
-        <%- episode.description %>
         <div class="wrapz">
-          <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.enclosure_url %>" title="<%= episode.title %>" artist="Data Skeptic Podcast" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
+          <% if (guests.length == 0) { %>
+            <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.enclosure_url %>" title="<%= episode.title %>" artist="Data Skeptic" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
+          <% } else if (guests.length == 1) { const guest = guests[0]; %>
+            <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.enclosure_url %>" title="<%= episode.title %>" artist="" album="with guest <%= guest.name %>" artwork="https://s3.amazonaws.com/feaas-prod/<%= guest.image_key %>" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
+          <% } else if (guests.length > 1) { %>
+            <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.enclosure_url %>" title="<%= episode.title %>" artist="Data Skeptic" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
+            <h4>Guests</h4>
+            <% for(const guest of guests) { %>
+              <div class="guest row">
+                <div class="col-sm-2">
+                  <img class="guest-image" src="https://s3.amazonaws.com/feaas-prod/<%= guest.image_key %>" />
+                </div>
+                <div class="col-sm-9 guest-area">
+                  <div class="guest-name"><%= guest.name %></div>
+                  <div class="guest-twitter"><a href="https://twitter.com/<%= guest.twitter.substring(1) %>"><%= guest.twitter %></a></div>
+                </div>
+              </div>
+            <% } %>
+          <% } %>
         </div>
+        <div>
+        </div>
+        <%- episode.content_encoded %>
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <h3>Recent</h3>
       <% for(const blog of blogs) { %>
         <div><b><a href="<%= blog.link %>"><%= blog.title %></b></a><span class="recent_date"> - <%= blog.dt %></span></div>
