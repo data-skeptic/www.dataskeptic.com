@@ -147,9 +147,7 @@ async function get_dynamo_object(object_id) {
         if (data['Item']) {
             for (const k of Object.keys(data['Item'])) {
                 const db_v = data['Item'][k]
-                console.log({db_v})
                 const v = Object.values(db_v)[0]
-                console.log({v})
                 result[k] = v
             }
         }
