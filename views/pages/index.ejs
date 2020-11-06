@@ -57,7 +57,7 @@
     <div class="col-sm-4">
       <h3>Recent</h3>
       <% for(const blog of blogs) { %>
-        <div><b><a href="<%= blog.link %>"><%= blog.title %></b></a><span class="recent_date"> - <%= blog.dt %></span></div>
+        <div><b><a href="<%= blog.public_url %>"><%= blog.title %></b></a><span class="recent_date"> - <%= blog.dt %></span></div>
       <% } %>
     </div>
     

@@ -119,13 +119,16 @@ app.get('/', async function(req, res) {
         sec = (sec < 10 ? "0" : "") + sec;
         var str = date.getFullYear() + "-" + month + "-" + day;
         blog['dt'] = str;
-        link = blog['link'];
-        if (link) {
-            if (link.startsWith("http://dataskeptic.com")) {
-                blog['link'] = link.substring(22);
+        if (blog['public_url'] == undefined) {
+            blog['public_url'] = blog['link'];
+        }
+        public_url = blog['public_url'];
+        if (public_url) {
+            if (public_url.startsWith("http://dataskeptic.com")) {
+                blog['public_url'] = public_url.substring(22);
             }
-            if (link.startsWith("https://dataskeptic.com")) {
-                blog['link'] = link.substring(23);
+            if (public_url.startsWith("https://dataskeptic.com")) {
+                blog['public_url'] = public_url.substring(23);
             }            
         }
     }
