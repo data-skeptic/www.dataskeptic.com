@@ -8,15 +8,32 @@
 
 <% include ../partials/nav.ejs %>
 
-<% if (episode !== undefined) { %>
-<div class="container">
-  <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.mp3_url %>" artwork="<%= episode.album_cover %>" title="<%= episode.title %>"></script>
-</div>
-<% } %>
+<% if (metadata) { %>
 
-<div class="container">
-  <%- body %>
-</div>
+    <div class="container">
+      <script src="http://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= metadata.enclosure_url %>" artwork="<%= metadata.itunes_image %>" title="<%= metadata.title %>"></script>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="<%= metadata.itunes_image %>" class="album_art" />
+            </div>
+            <div class="col-sm-8">
+              <%- body %>
+            </div>
+        </div>
+
+    </div>
+
+<% } else { %>
+
+    <div class="container">
+        <%- body %>
+    </div>
+
+<% } %>
 
 <br/><br/><br/>
 

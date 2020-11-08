@@ -161,6 +161,32 @@ async function get_dynamo_object(object_id) {
     return undefined;
 }
 
+async function get_stream(timestamp) {
+    const stream_id = "kyle@dataskeptic.com/stream.com.dataskeptic.blog"
+    var params = {
+        TableName: 'feaas-feeds-prod',
+        Key: { 
+            'stream_id': {'S': stream_id },
+            'timestamp': {'N': timestamp }
+        }
+    }
+    try{
+        data = await dynamo.getItem(params).promise()
+        const result = {}
+        if (data['Item']) {
+            for (const k of Object.keys(data['Item'])) {
+                const db_v = data['Item'][k]
+                const v = Object.values(db_v)[0]
+                result[k] = v
+            }
+        }
+        return result
+    } catch (err) {
+        console.log(err)
+    }
+    return undefined;
+}
+
 async function get_s3_json_data(key, null_val=null) {
     var getParams = {
         Bucket: bucket_name,
@@ -323,22 +349,23 @@ app.get('/podcasts/2014', async (req, res) => {
     res.render('pages/podcasts', {title, episodes});
 });
 
-app.get('/blog/*', function(req, res) {
+app.get('/blog/*', async function(req, res) {
     var key = req.path;
+    const url = `https://dataskeptic.com/blog/${key.substring(6, key.length)}`
+    console.log({url})
+    var doc = await get_dynamo_object(url)
+    var metadata = undefined
+    if (doc && doc['timestamp']) {
+        metadata = await get_stream(doc['timestamp'])
+    }
     if(key.indexOf(".html") === -1) {
         key = key + ".html";
     }
     key = root + key.substring(6, key.length)
-    const metadata_key = key.substring(0, key.length - 5) + ".episode.json"
     var getParams = {
         Bucket: bucket_name,
         Key: key
     }
-    var getParams2 = {
-        Bucket: bucket_name,
-        Key: metadata_key
-    }
-    var episode = undefined
     s3.getObject(getParams, function(err, data) {
         if (err) {
             console.log(err)
@@ -346,15 +373,7 @@ app.get('/blog/*', function(req, res) {
             return err;
         }
         let body = data.Body.toString('utf-8');
-        s3.getObject(getParams2, function(err, data) {
-            if (err) {
-                res.render('pages/blog', {body, episode})
-            } else {
-                const ebody = data.Body.toString('utf-8');
-                episode = JSON.parse(ebody);
-                res.render('pages/blog', {body, episode})
-            }
-        });
+        res.render('pages/blog', {body, metadata})
     });
 
 });
