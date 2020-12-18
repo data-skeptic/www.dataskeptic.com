@@ -38,11 +38,11 @@
         <h3><%= episode.title %> (<%= episode.itunes_duration %>)</h3>
         <div class="wrapz">
           <% if (guests.length == 0) { %>
-            <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.enclosure_url %>" title="<%= episode.title %>" artist="Data Skeptic" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
+            <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.enclosure_url %>" title="<%= episode.title %>" artist="Data Skeptic" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" owner="kyle@dataskeptic.com" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
           <% } else if (guests.length == 1) { const guest = guests[0]; %>
-            <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.enclosure_url %>" title="<%= episode.title %>" artist="" album="with guest <%= guest.name %>" artwork="https://s3.amazonaws.com/feaas-prod/<%= guest.image_key %>" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
+            <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.enclosure_url %>" title="<%= episode.title %>" artist="" album="with guest <%= guest.name %>" artwork="https://s3.amazonaws.com/feaas-prod/<%= guest.image_key %>" owner="kyle@dataskeptic.com" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
           <% } else if (guests.length > 1) { %>
-            <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.enclosure_url %>" title="<%= episode.title %>" artist="Data Skeptic" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
+            <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= episode.enclosure_url %>" title="<%= episode.title %>" artist="Data Skeptic" album="" artwork="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg" owner="kyle@dataskeptic.com" playerId="d365a51f-a60e-4d21-bde6-906ea50f9172"></script>
             <h4>Guests</h4>
             <% for(const guest of guests) { %>
               <div class="guest row">
