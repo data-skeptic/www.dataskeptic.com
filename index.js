@@ -2,6 +2,7 @@ const AWS = require('aws-sdk');
 const cache = require('memory-cache-ttl');
 const express = require('express')
 const path = require('path')
+const redirects = require('./redirects.js').redirects
 const PORT = process.env.PORT || 5000
 
 var s3 = new AWS.S3({region: 'us-east-1'});
@@ -369,6 +370,7 @@ app.get('/blog/*', async function(req, res) {
     s3.getObject(getParams, function(err, data) {
         if (err) {
             console.log(err)
+            console.log({key})
             res.render('pages/error')
             return err;
         }
@@ -384,7 +386,17 @@ app.get('/ads.txt', (req, res) =>
     res.send('google.com, pub-9618988589932555, DIRECT, f08c47fec0942fa0')
 );
 
-app.get('*', (req, res) => res.send('Page Not found 404'));
+app.get('*', async function(req, res) {
+    var key = req.path;
+    var val = redirects[key]
+    if (val !== undefined) {
+        console.log(`Redirect ${key} to ${val}`)
+        res.redirect(307, val)
+    } else {
+        res.send('Page Not found 404')        
+    }
+
+});
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
