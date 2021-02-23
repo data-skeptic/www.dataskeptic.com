@@ -1,7 +1,28 @@
 exports.redirects = {
     "/epnotes/2015-holiday-special.php": "https://dataskeptic.com/blog/episodes/2015/2015-holiday-special",
     "/blog/episodes/2015/2015_Holiday_Special": "https://dataskeptic.com/blog/episodes/2015/2015-holiday-special",
-    "/epnotes/wikipedia-revision-scoring-as-a-service.php": "https://dataskeptic.com/blog/episodes/2015/wikipedia-revision-scoring-as-a-service"
+    "/epnotes/wikipedia-revision-scoring-as-a-service.php": "https://dataskeptic.com/blog/episodes/2015/wikipedia-revision-scoring-as-a-service",
+    "/epnotes/ep54_z-scores.php": "https://dataskeptic.com/blog/episodes/2015/z-scores",
+    "/epnotes/ep79_covariance-and-correlation.php": "https://dataskeptic.com/blog/episodes/2015/covariance_and_correlation",
+    "/epnotes/ep78_bayesian-a-b-testing.php": "https://dataskeptic.com/blog/episodes/2015/bayesian-methods-for-hackers",
+    "/epnotes/ep77_central-limit-theorem.php": "https://dataskeptic.com/blog/episodes/2015/Central_Limit_Theorem",
+    "/epnotes/ep76_accessible-technology.php": "https://dataskeptic.com/blog/episodes/2015/accessible-technology",
+    "/epnotes/ep75_multi-armed-bandit-problems.php": "https://dataskeptic.com/blog/episodes/2015/multi-armed-bandit",
+    "/epnotes/ep74_shakespeare-abiogenesis-and-exoplanets.php": "https://dataskeptic.com/blog/episodes/2015/Shakespeare-abiogenesis-exoplanets",
+    "/epnotes/ep73_small-sample-sizes.php": "https://dataskeptic.com/blog/episodes/2015/sample_sizes",
+    "/epnotes/ep72_model-complexity-myth.php": "https://dataskeptic.com/blog/episodes/2015/model_complexity_myth",
+    "/epnotes/ep71_distance-measures.php": "https://dataskeptic.com/blog/episodes/2015/distance_measures",
+    "/epnotes/ep70_contentmine.php": "https://dataskeptic.com/blog/episodes/2015/contentmine",
+    "/epnotes/ep69_structured-and-unstructured.php": "https://dataskeptic.com/blog/episodes/2015/structured_unstructured",
+    "/epnotes/ep68_measuring-the-influence-of-fashion-designers.php": "https://dataskeptic.com/blog/episodes/2015/yusan_lin",
+    "/epnotes/ep67_pagerank.php": "https://dataskeptic.com/blog/episodes/2015/pagerank",
+    "/epnotes/ep66_data-science-at-work-in-la-county.php": "https://dataskeptic.com/blog/episodes/2015/uminsky",
+    "/epnotes/ep65_k-nearest-neighbors.php": "https://dataskeptic.com/blog/episodes/2015/MINI_knn",
+    "/epnotes/ep63_map-reduce.php": "https://dataskeptic.com/blog/episodes/2015/MINI_Map_Reduce",
+    "/epnotes/ep62_genetically-engineered-food-and-trends-in-herbicide-usage.php": "https://dataskeptic.com/blog/episodes/2015/glyphosate",
+    "/epnotes/ep61_the-curse-of-dimensionality.php": "https://dataskeptic.com/blog/episodes/2015/MINI_The_Curse_of_Dimensionality",
+    "/epnotes/ep60_game-analytics.php": "https://dataskeptic.com/blog/episodes/2015/Game_Analytics_with_Anders_Dracken",
+    "/epnotes/ep59_anscombes_quartet.php": "https://dataskeptic.com/blog/episodes/2015/MINI_Anscombes_Quartet"
 }
 
 
@@ -11,31 +32,10 @@ exports.redirects = {
 // FAIL: http://dataskeptic.com/epnotes/neuroscience-from-a-data-scientists-perspective.php https://dataskeptic.com/blog/episodes/2015/neuroscience
 // FAIL: http://dataskeptic.com/epnotes/bias-variance-tradeoff.php https://dataskeptic.com/blog/episodes/2015/bias-variance-tradeoff
 // FAIL: http://dataskeptic.com/epnotes/big-data-doesnt-exist.php https://dataskeptic.com/blog/episodes/2015/big-data-doesnt-exist
-// FAIL: http://dataskeptic.com/epnotes/ep79_covariance-and-correlation.php https://dataskeptic.com/blog/episodes/2015/covariance_and_correlation
-// FAIL: http://dataskeptic.com/epnotes/ep78_bayesian-a-b-testing.php https://dataskeptic.com/blog/episodes/2015/bayesian-methods-for-hackers
-// FAIL: http://dataskeptic.com/epnotes/ep77_central-limit-theorem.php https://dataskeptic.com/blog/episodes/2015/Central_Limit_Theorem
-// FAIL: http://dataskeptic.com/epnotes/ep76_accessible-technology.php https://dataskeptic.com/blog/episodes/2015/accessible-technology
-// FAIL: http://dataskeptic.com/epnotes/ep75_multi-armed-bandit-problems.php https://dataskeptic.com/blog/episodes/2015/multi-armed-bandit
-// FAIL: http://dataskeptic.com/epnotes/ep74_shakespeare-abiogenesis-and-exoplanets.php https://dataskeptic.com/blog/episodes/2015/Shakespeare-abiogenesis-exoplanets
-// FAIL: http://dataskeptic.com/epnotes/ep73_small-sample-sizes.php https://dataskeptic.com/blog/episodes/2015/sample_sizes
-// FAIL: http://dataskeptic.com/epnotes/ep72_model-complexity-myth.php https://dataskeptic.com/blog/episodes/2015/model_complexity_myth
-// FAIL: http://dataskeptic.com/epnotes/ep71_distance-measures.php https://dataskeptic.com/blog/episodes/2015/distance_measures
-// FAIL: http://dataskeptic.com/epnotes/ep70_contentmine.php https://dataskeptic.com/blog/episodes/2015/contentmine
-// FAIL: http://dataskeptic.com/epnotes/ep69_structured-and-unstructured.php https://dataskeptic.com/blog/episodes/2015/structured_unstructured
-// FAIL: http://dataskeptic.com/epnotes/ep68_measuring-the-influence-of-fashion-designers.php https://dataskeptic.com/blog/episodes/2015/yusan_lin
-// FAIL: http://dataskeptic.com/epnotes/ep67_pagerank.php https://dataskeptic.com/blog/episodes/2015/pagerank
-// FAIL: http://dataskeptic.com/epnotes/ep66_data-science-at-work-in-la-county.php https://dataskeptic.com/blog/episodes/2015/uminsky
-// FAIL: http://dataskeptic.com/epnotes/ep65_k-nearest-neighbors.php https://dataskeptic.com/blog/episodes/2015/MINI_knn
-// FAIL: http://dataskeptic.com/epnotes/ep63_map-reduce.php https://dataskeptic.com/blog/episodes/2015/MINI_Map_Reduce
-// FAIL: http://dataskeptic.com/epnotes/ep62_genetically-engineered-food-and-trends-in-herbicide-usage.php https://dataskeptic.com/blog/episodes/2015/glyphosate
-// FAIL: http://dataskeptic.com/epnotes/ep61_the-curse-of-dimensionality.php https://dataskeptic.com/blog/episodes/2015/MINI_The_Curse_of_Dimensionality
-// FAIL: http://dataskeptic.com/epnotes/ep60_game-analytics.php https://dataskeptic.com/blog/episodes/2015/Game_Analytics_with_Anders_Dracken
-// FAIL: http://dataskeptic.com/epnotes/ep59_anscombes_quartet.php https://dataskeptic.com/blog/episodes/2015/MINI_Anscombes_Quartet
 // FAIL: http://dataskeptic.com/epnotes/proposing-annoyance-mining.php https://dataskeptic.com/blog/episodes/2015/annoyance_mining
 // FAIL: http://dataskeptic.com/epnotes/ep57_preserving-history-at-cyark.php https://dataskeptic.com/blog/episodes/2015/Cyark
 // FAIL: http://dataskeptic.com/epnotes/ep56_a-critical-examination-of-a-study-of-marriage-by-political-affiliation.php https://dataskeptic.com/blog/episodes/2015/marriage-analysis
 // FAIL: http://dataskeptic.com/epnotes/ep55_detecting-cheating-in-chess.php https://dataskeptic.com/blog/episodes/2015/detecting-cheating-in-chess
-// FAIL: http://dataskeptic.com/epnotes/ep54_z-scores.php https://dataskeptic.com/blog/episodes/2015/z-scores
 // FAIL: http://dataskeptic.com/epnotes/ep53_using-data-to-help-those-in-crisis.php https://dataskeptic.com/blog/episodes/2015/Crisis_Text_Line
 // FAIL: http://dataskeptic.com/epnotes/ep52_the-ghost-in-the-mp3-with-Ryan-Maguire.php https://dataskeptic.com/blog/episodes/2015/The_Ghost_in_the_MP3
 // FAIL: http://dataskeptic.com/epnotes/ep51_data-fest-2015.php https://dataskeptic.com/blog/episodes/2015/Data_Fest_2015
