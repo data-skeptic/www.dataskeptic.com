@@ -4,6 +4,7 @@ const express = require('express')
 const path = require('path')
 const redirects = require('./redirects.js').redirects
 const PORT = process.env.PORT || 5000
+const showdown  = require('showdown')
 
 var s3 = new AWS.S3({region: 'us-east-1'});
 var dynamo = new AWS.DynamoDB({region: 'us-east-1'});
@@ -31,6 +32,8 @@ app.use(function (err, req, res, next) {
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
+
+app.get('/download', (req, res) => res.redirect(301, req.query.q))
 
 app.get('/feed.rss', (req, res) => res.redirect(307, 'http://dataskeptic.libsyn.com/rss'))
 
@@ -132,8 +135,14 @@ app.get('/', async function(req, res) {
                 blog['public_url'] = public_url.substring(23);
             }            
         }
+        if (blog['body']) {
+            var converter = new showdown.Converter()
+            blog['body'] = converter.makeHtml(blog['body'])
+
+        }
     }
-    res.render('pages/index', {episode, blogs, guests})
+    var metadata = {}
+    res.render('pages/index', {metadata, episode, blogs, guests})
 })
 
 
@@ -355,9 +364,12 @@ app.get('/blog/*', async function(req, res) {
     const url = `https://dataskeptic.com/blog/${key.substring(6, key.length)}`
     console.log({url})
     var doc = await get_dynamo_object(url)
-    var metadata = undefined
+    var metadata = {}
     if (doc && doc['timestamp']) {
         metadata = await get_stream(doc['timestamp'])
+    } else {
+        console.log({nodoc: doc})
+        metadata = undefined
     }
     if(key.indexOf(".html") === -1) {
         key = key + ".html";

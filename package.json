@@ -16,7 +16,8 @@
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "express-http-to-https": "^1.1.4",
-    "memory-cache-ttl": "^1.0.52"
+    "memory-cache-ttl": "^1.0.52",
+    "showdown": "^1.9.1"
   },
   "devDependencies": {
     "request": "^2.81.0",

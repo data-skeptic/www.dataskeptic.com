@@ -63,10 +63,42 @@
       </div>
     </div>
     <div class="col-sm-4">
+      <style>
+        .SmallBlog {
+          margin-bottom: 20px;   
+          min-height: 110px;       
+        }
+        .SmallBlogImage {
+          float: left;
+          max-width: 100px;
+          max-height: 100px;
+          padding: 5px;
+          margin: 0px;
+        }
+        .SmallBlogHeader {
+          background-color: #e8e8e8;
+        }
+        .SmallBlogBody {
+          
+        }
+      </style>
       <h3>Recent</h3>
-      <% for(const blog of blogs) { %>
-        <div><b><a href="<%= blog.public_url %>"><%= blog.title %></b></a><span class="recent_date"> - <%= blog.dt %></span></div>
-      <% } %>
+      <% for(const blog of blogs) {
+        if (blog.itunes_image) {
+          var url = blog.itunes_image;
+          var title = blog.title
+          var dt = blog.dt
+          var body = blog.body
+          var public_url = blog.public_url
+          %>
+          <div class="SmallBlog">
+            <img src="<%= url %>" class="SmallBlogImage" />
+            <div class="SmallBlogHeader"><b><a href="<%= public_url %>"><%= title %></a></b><span class="recent_date"> - <%= dt %></span></div>
+            <div class="SmallBlogBody"><%- body %></div>
+          </div>
+        <% } else { %>
+          <div><b><a href="<%= public_url %>"><%= blog.title %></a></b><span class="recent_date"> - <%= blog.dt %></span></div>
+      <% } } %>
     </div>
     
   </div>
