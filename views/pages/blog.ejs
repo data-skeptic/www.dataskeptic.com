@@ -16,7 +16,6 @@
 
 <% if (metadata) { %>
 
-    
     <div class="container">
 
         <div class="row">
@@ -28,7 +27,23 @@
                     <script src="https://s3.amazonaws.com/dataskeptic.com/player.js" playlist="<%= metadata.enclosure_url %>" artwork="<%= metadata.itunes_image %>" title="<%= metadata.title %>"></script>
                 </div>
                 <div class="dl_btn"><a href="/download/?q=<%= metadata.enclosure_url %>" download><button class="btn"><i class="fa fa-download"></i> Download</button></a></div>
-              <%- body %>
+                    <%- body %>
+                    <br/>
+
+                    <% if (transcript.sentences.length > 0) { %>
+                        <h3>Transcript</h3>
+                    <% } %>
+
+                    <table>
+                        <% for (var i=0; i < transcript.sentences.length; i++) { %>
+                            <tr>
+                                <td valign="top" style="min-width:100px"><%= transcript.sentences[i].speaker %></td>
+                                <td><%= transcript.sentences[i].text %></td>
+                            </tr>
+                            <tr><td>&nbsp;</td></tr>
+                        <% } %>
+                    </table>
+                </div>
             </div>
         </div>
 

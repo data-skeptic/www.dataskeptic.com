@@ -379,6 +379,12 @@ app.get('/blog/*', async function(req, res) {
         Bucket: bucket_name,
         Key: key
     }
+    var transcript = []
+    if (metadata['timeline_key']) {
+        // # TODO: load it to pass in
+        var data = await s3.getObject({Bucket: bucket_name, Key: metadata['timeline_key']}).promise();
+        transcript = JSON.parse(data.Body.toString('utf-8'));
+    }
     s3.getObject(getParams, function(err, data) {
         if (err) {
             console.log(err)
@@ -387,7 +393,8 @@ app.get('/blog/*', async function(req, res) {
             return err;
         }
         let body = data.Body.toString('utf-8');
-        res.render('pages/blog', {body, metadata})
+        console.log({a:transcript.sentences[0]})
+        res.render('pages/blog', {body, metadata, transcript})
     });
 
 });
