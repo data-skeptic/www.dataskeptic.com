@@ -393,7 +393,6 @@ app.get('/blog/*', async function(req, res) {
             return err;
         }
         let body = data.Body.toString('utf-8');
-        console.log({a:transcript.sentences[0]})
         res.render('pages/blog', {body, metadata, transcript})
     });
 
