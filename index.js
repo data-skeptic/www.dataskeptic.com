@@ -380,7 +380,7 @@ app.get('/blog/*', async function(req, res) {
         Key: key
     }
     var transcript = {"sentences": []}
-    if (metadata['timeline_key']) {
+    if (metadata && metadata['timeline_key']) {
         // # TODO: load it to pass in
         var data = await s3.getObject({Bucket: bucket_name, Key: metadata['timeline_key']}).promise();
         transcript = JSON.parse(data.Body.toString('utf-8'));
