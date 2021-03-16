@@ -371,6 +371,14 @@ app.get('/blog/*', async function(req, res) {
         console.log({nodoc: doc})
         metadata = undefined
     }
+    var guests = []
+    if (metadata['guests']) {
+        for (var guest_o of metadata['guests']) {
+            var guest_s = guest_o['S']
+            var g = await get_dynamo_object('kyle@dataskeptic.com/stream.com.dataskeptic.blog.guest.heidi-howard')
+            guests.push(g)
+        }
+    }
     if(key.indexOf(".html") === -1) {
         key = key + ".html";
     }
@@ -393,7 +401,7 @@ app.get('/blog/*', async function(req, res) {
             return err;
         }
         let body = data.Body.toString('utf-8');
-        res.render('pages/blog', {body, metadata, transcript})
+        res.render('pages/blog', {body, metadata, transcript, guests})
     });
 
 });

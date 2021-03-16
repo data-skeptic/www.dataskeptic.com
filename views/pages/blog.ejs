@@ -21,6 +21,12 @@
         <div class="row">
             <div class="col-sm-4">
                 <img src="<%= metadata.itunes_image %>" class="album_art" />
+                <% for (var guest of guests) { %>
+                    <hr/>
+                    <h3><%= guest.name %></h3>
+                    <p><%= guest.bio %></p>
+                    <a href="https://twitter.com/heidiann360"><%= guest.twitter %></a>
+                <% } %>
             </div>
             <div class="col-sm-8">
                 <div>
