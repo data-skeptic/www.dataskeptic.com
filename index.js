@@ -372,7 +372,7 @@ app.get('/blog/*', async function(req, res) {
         metadata = undefined
     }
     var guests = []
-    if (metadata['guests']) {
+    if (metadata && metadata['guests']) {
         for (var guest_o of metadata['guests']) {
             var guest_s = guest_o['S']
             var g = await get_dynamo_object('kyle@dataskeptic.com/stream.com.dataskeptic.blog.guest.heidi-howard')
@@ -402,10 +402,9 @@ app.get('/blog/*', async function(req, res) {
         }
         let body = data.Body.toString('utf-8');
         var title = 'Data Skeptic'
-        if (metadata.title) {
+        if (metadata && metadata.title) {
             title = metadata.title;
         }
-        console.log({title})
         res.render('pages/blog', {body, metadata, transcript, guests, title})
     });
 
