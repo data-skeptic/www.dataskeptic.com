@@ -401,7 +401,12 @@ app.get('/blog/*', async function(req, res) {
             return err;
         }
         let body = data.Body.toString('utf-8');
-        res.render('pages/blog', {body, metadata, transcript, guests})
+        var title = 'Data Skeptic'
+        if (metadata.title) {
+            title = metadata.title;
+        }
+        console.log({title})
+        res.render('pages/blog', {body, metadata, transcript, guests, title})
     });
 
 });
