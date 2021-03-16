@@ -36,6 +36,18 @@
                     <%- body %>
                     <br/>
 
+                    <div class="container" style="max-width: 600px;">
+                        <% if (related.length > 0) { %>
+                            <h3>Related Posts</h3>
+                        <% } %>
+                        <% for (var r of related) { %>
+                            <hr/>
+                            <a href="/<%= r['M'].url.S %>"><%= r['M'].title.S %></a>
+                            <p><%= r['M'].body.S %></p>
+                        <% } %>
+
+                    </div>
+
                     <% if (transcript && transcript.sentences && transcript.sentences.length > 0) { %>
                         <h3>Automated Transcript</h3>
                     <% } %>

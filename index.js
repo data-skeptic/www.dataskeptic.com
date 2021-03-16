@@ -375,9 +375,13 @@ app.get('/blog/*', async function(req, res) {
     if (metadata && metadata['guests']) {
         for (var guest_o of metadata['guests']) {
             var guest_s = guest_o['S']
-            var g = await get_dynamo_object('kyle@dataskeptic.com/stream.com.dataskeptic.blog.guest.heidi-howard')
+            var g = await get_dynamo_object(`kyle@dataskeptic.com/stream.com.dataskeptic.blog.guest.${guest_s}`)
             guests.push(g)
         }
+    }
+    var related = []
+    if (metadata && metadata['related']) {
+        related = metadata['related']
     }
     if(key.indexOf(".html") === -1) {
         key = key + ".html";
@@ -405,7 +409,7 @@ app.get('/blog/*', async function(req, res) {
         if (metadata && metadata.title) {
             title = metadata.title;
         }
-        res.render('pages/blog', {body, metadata, transcript, guests, title})
+        res.render('pages/blog', {body, metadata, transcript, guests, title, related})
     });
 
 });
