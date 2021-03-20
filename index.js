@@ -397,15 +397,15 @@ app.get('/blog/*', async function(req, res) {
         var data = await s3.getObject({Bucket: bucket_name, Key: metadata['timeline_key']}).promise();
         transcript = JSON.parse(data.Body.toString('utf-8'));
     }
+    var title = 'Data Skeptic'
     s3.getObject(getParams, function(err, data) {
         if (err) {
             console.log(err)
             console.log({key})
-            res.render('pages/error')
+            res.render('pages/error', {title})
             return err;
         }
         let body = data.Body.toString('utf-8');
-        var title = 'Data Skeptic'
         if (metadata && metadata.title) {
             title = metadata.title;
         }
