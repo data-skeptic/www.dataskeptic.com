@@ -371,6 +371,9 @@ app.get('/blog/*', async function(req, res) {
         console.log({nodoc: doc})
         metadata = undefined
     }
+    if (metadata.enclosure_url === undefined) {
+        metadata['enclosure_url'] = doc['enclosure_url']
+    }
     var guests = []
     if (metadata && metadata['guests']) {
         for (var guest_o of metadata['guests']) {
