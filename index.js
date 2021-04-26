@@ -39,6 +39,8 @@ app.get('/feed.rss', (req, res) => res.redirect(307, 'http://dataskeptic.libsyn.
 
 app.get('/survey', (req, res) => res.redirect(307, 'https://docs.google.com/forms/d/e/1FAIpQLSc7SbmG04zJFxrDsMH0uIm1geqKwDSJ6P3gq3oGl_9T251Pww/viewform'))
 
+app.get('/vote', (req, res) => res.redirect(301, 'https://forms.gle/nant6c3HyhXkCVobA'))
+
 app.get('/meetup', (req, res) => res.redirect(307, 'https://www.meetup.com/Data-Skeptic/'))
 
 app.get('/live', (req, res) => res.redirect(307, 'https://www.youtube.com/watch?v=4cFAH1Eji2U'))
