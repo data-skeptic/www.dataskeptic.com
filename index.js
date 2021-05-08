@@ -108,8 +108,12 @@ app.get('/', async function(req, res) {
             guests.push(guest)
         }
     }
+    var home_logo = "https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg"
     console.log(JSON.stringify(guests))
     const blogdata = await get_s3_json_data(`${root}latest-blogs.json`, []);
+    if ('itunes_image' in episode) {
+        home_logo = episode['itunes_image']
+    }
     const blogs = blogdata['blogs'];
     for (const blog of blogs) {
         const date = new Date(blog['timestamp'])
@@ -144,7 +148,7 @@ app.get('/', async function(req, res) {
         }
     }
     var metadata = {}
-    res.render('pages/index', {metadata, episode, blogs, guests})
+    res.render('pages/index', {home_logo, metadata, episode, blogs, guests})
 })
 
 

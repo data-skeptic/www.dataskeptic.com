@@ -17,7 +17,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-3">
-      <center><img class="home_logo" src="https://s3.amazonaws.com/dataskeptic.com/ds_sm.jpg"></center>
+      <center><img class="home_logo" src="<%= home_logo %>"></center>
       <br/>
       <p>Your trusted podcast, centered on data science, machine learning, and artificial intelligence.</p>
       <p>Tune in weekly for the latest interviews with leading experts.</p>
@@ -64,6 +64,10 @@
     </div>
     <div class="col-sm-4">
       <style>
+        .home_logo {
+          max-width: 250px;
+          max-height: 250px;
+        }
         .SmallBlog {
           margin-bottom: 20px;   
           min-height: 110px;       
